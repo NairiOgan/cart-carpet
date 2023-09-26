@@ -2,18 +2,18 @@
 // Мобильное меню
 const mobileMenuBtns = document.querySelectorAll('.mobile__btn');
 
-mobileMenuBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        const mobileMenu = document.querySelector('.mobile-menu');
-        mobileMenu.classList.toggle('active');
-    });
+mobileMenuBtns.forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    const mobileMenu = document.querySelector('.mobile-menu');
+    mobileMenu.classList.toggle('active');
+  });
 });
 
 // Обработчик клика на документе для закрытия модального окна при клике вне него
-document.addEventListener('click', function(event) {
-    if (mobileMenu.classList.contains('active') && !mobileMenu.contains(event.target) && !Array.from(mobileMenuBtns).some(btn => btn.contains(event.target))) {
-        mobileMenu.classList.remove('active');
-    }
+document.addEventListener('click', function (event) {
+  if (mobileMenu.classList.contains('active') && !mobileMenu.contains(event.target) && !Array.from(mobileMenuBtns).some(btn => btn.contains(event.target))) {
+    mobileMenu.classList.remove('active');
+  }
 });
 
 // =====================================================================
@@ -25,7 +25,7 @@ const mobileMenu = document.querySelector('.mobile-menu'); // Добавляем
 
 
 
-window.onscroll = function() {
+window.onscroll = function () {
   const currentScrollPos = window.scrollY;
   const windowWidth = window.innerWidth;
 
@@ -45,20 +45,20 @@ window.onscroll = function() {
     // Закрываем мобильное меню при скроллинге вверх
     mobileMenu.classList.remove('active');
   }
-  
+
   prevScrollpos = currentScrollPos;
 }
 
 // Активный пункт меню в шапке при скролле 
 // Функция для определения, находится ли элемент в видимой области окна
 function isElementInViewport(element) {
-    var rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
+  var rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
 }
 
 // =====================================================================
@@ -70,35 +70,35 @@ function hasContactsSection() {
 
 const mobileMenuItems = document.querySelectorAll('.menu-item');
 mobileMenuItems.forEach((menuItem) => {
-  menuItem.addEventListener('click', function(event) {
-      const href = menuItem.getAttribute('href'); // Получаем полный href атрибут
+  menuItem.addEventListener('click', function (event) {
+    const href = menuItem.getAttribute('href'); // Получаем полный href атрибут
 
-      // Если href содержит #contacts, то убираем всю часть ссылки кроме #contacts
-      const targetSectionId = href.includes('#contacts') ? '#contacts' : href;
+    // Если href содержит #contacts, то убираем всю часть ссылки кроме #contacts
+    const targetSectionId = href.includes('#contacts') ? '#contacts' : href;
 
-      // Проверяем, есть ли секция с айди "contacts" на текущей странице
-      if (targetSectionId === '#contacts' && hasContactsSection()) {
-          event.preventDefault();
-          scrollToSection(targetSectionId);
-      } else {
-          // В данном случае, если секции нет, мы просто переходим на URL
-          // без якоря, то есть на страницу index.html
-          
-      }
+    // Проверяем, есть ли секция с айди "contacts" на текущей странице
+    if (targetSectionId === '#contacts' && hasContactsSection()) {
+      event.preventDefault();
+      scrollToSection(targetSectionId);
+    } else {
+      // В данном случае, если секции нет, мы просто переходим на URL
+      // без якоря, то есть на страницу index.html
+
+    }
   });
 });
 
 // Функция для скролла к секции
 function scrollToSection(targetSectionId) {
   const targetSection = document.querySelector(targetSectionId);
-  
-  if (targetSection) { // Проверяем, существует ли секция
-      const offsetTop = targetSection.offsetTop;
 
-      window.scrollTo({
-          top: offsetTop,
-          behavior: 'smooth'
-      });
+  if (targetSection) { // Проверяем, существует ли секция
+    const offsetTop = targetSection.offsetTop;
+
+    window.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth'
+    });
   }
 }
 
@@ -108,7 +108,7 @@ function scrollToSection(targetSectionId) {
 // =====================================================================
 // Функция для обновления активного пункта меню при прокрутке страницы
 // Прослушиваем событие прокрутки страницы
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', function () {
   // Получаем текущую позицию прокрутки страницы
   var scrollPosition = window.scrollY;
 
@@ -116,7 +116,7 @@ window.addEventListener('scroll', function() {
   var menuItems = document.querySelectorAll('.header-menu__list__item');
 
   // Проходим по каждому пункту меню и проверяем, находится ли соответствующая секция в видимой области
-  menuItems.forEach(function(menuItem) {
+  menuItems.forEach(function (menuItem) {
     var targetHref = menuItem.querySelector('a').getAttribute('href');
     var targetId = targetHref.split('#')[1]; // Разделяем URL по символу '#' и берем вторую часть
 
@@ -140,78 +140,78 @@ window.addEventListener('scroll', function() {
 // Вызываем событие прокрутки страницы при загрузке страницы для установки начального состояния
 window.dispatchEvent(new Event('scroll'));
 
-  
+
 // =====================================================================
 // Селекты
-document.addEventListener("DOMContentLoaded", function() {
-    // Функция для закрытия всех селектов
-    function closeAllSelect(elmnt) {
-      let x, y, i, arrNo = [];
-      x = document.getElementsByClassName("select-items");
-      y = document.getElementsByClassName("select-selected");
-      for (i = 0; i < y.length; i++) {
-        if (elmnt == y[i]) {
-          arrNo.push(i)
-        } else {
-          y[i].classList.remove("select-arrow-active");
-        }
-      }
-      for (i = 0; i < x.length; i++) {
-        if (arrNo.indexOf(i)) {
-          x[i].classList.remove("select-show");
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  // Функция для закрытия всех селектов
+  function closeAllSelect(elmnt) {
+    let x, y, i, arrNo = [];
+    x = document.getElementsByClassName("select-items");
+    y = document.getElementsByClassName("select-selected");
+    for (i = 0; i < y.length; i++) {
+      if (elmnt == y[i]) {
+        arrNo.push(i)
+      } else {
+        y[i].classList.remove("select-arrow-active");
       }
     }
-  
-    // Закрываем селекты при клике вне них
-    document.addEventListener("click", function(e) {
-      closeAllSelect(e.target);
+    for (i = 0; i < x.length; i++) {
+      if (arrNo.indexOf(i)) {
+        x[i].classList.remove("select-show");
+      }
+    }
+  }
+
+  // Закрываем селекты при клике вне них
+  document.addEventListener("click", function (e) {
+    closeAllSelect(e.target);
+  });
+
+  // Обработчик клика для кастомного селекта
+  let customSelects = document.getElementsByClassName("custom-select");
+  for (let i = 0; i < customSelects.length; i++) {
+    customSelects[i].addEventListener("click", function (e) {
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.getElementsByTagName("div")[1].classList.toggle("select-show");
+      this.getElementsByTagName("div")[0].classList.toggle("select-arrow-active");
+
+      // Отладочный вывод
+      console.log("Custom select clicked.");
     });
-  
-    // Обработчик клика для кастомного селекта
-    let customSelects = document.getElementsByClassName("custom-select");
-    for (let i = 0; i < customSelects.length; i++) {
-      customSelects[i].addEventListener("click", function(e) {
+
+    // Обработчик клика для опций селекта
+    let selectItems = customSelects[i].querySelectorAll(".select-items__item");
+    for (let j = 0; j < selectItems.length; j++) {
+      selectItems[j].addEventListener("click", function (e) {
         e.stopPropagation();
-        closeAllSelect(this);
-        this.getElementsByTagName("div")[1].classList.toggle("select-show");
-        this.getElementsByTagName("div")[0].classList.toggle("select-arrow-active");
-        
-        // Отладочный вывод
-        console.log("Custom select clicked.");
-      });
-  
-      // Обработчик клика для опций селекта
-      let selectItems = customSelects[i].querySelectorAll(".select-items__item");
-      for (let j = 0; j < selectItems.length; j++) {
-        selectItems[j].addEventListener("click", function(e) {
-          e.stopPropagation();
-          let parent = this.parentElement.parentElement;
-          parent.getElementsByTagName("div")[0].innerHTML = this.innerHTML;
-          
-          // Найти форму по id "carForm"
-          let form = document.getElementById("carForm");
-          
-          if (form) {
-            // Поиск скрытого инпута внутри формы с заданным именем
-            let hiddenInput = form.querySelector("input[type='hidden'][name='" + parent.getAttribute("data-input-name") + "']");
-            
-            // Отладочный вывод
-            console.log("Hidden input:", hiddenInput);
-            
-            if (hiddenInput) {
-              hiddenInput.value = this.getAttribute("data-value");
-            } else {
-              console.error("Hidden input not found.");
-            }
+        let parent = this.parentElement.parentElement;
+        parent.getElementsByTagName("div")[0].innerHTML = this.innerHTML;
+
+        // Найти форму по id "carForm"
+        let form = document.getElementById("carForm");
+
+        if (form) {
+          // Поиск скрытого инпута внутри формы с заданным именем
+          let hiddenInput = form.querySelector("input[type='hidden'][name='" + parent.getAttribute("data-input-name") + "']");
+
+          // Отладочный вывод
+          console.log("Hidden input:", hiddenInput);
+
+          if (hiddenInput) {
+            hiddenInput.value = this.getAttribute("data-value");
           } else {
-            console.error("Form with id 'carForm' not found.");
+            console.error("Hidden input not found.");
           }
-          
-          closeAllSelect(parent);
-        });
-      }
+        } else {
+          console.error("Form with id 'carForm' not found.");
+        }
+
+        closeAllSelect(parent);
+      });
     }
+  }
 });
 
 
@@ -229,7 +229,7 @@ const colorCantOutput = document.getElementById('colorCantOutput');
 
 // Функция для обновления текстового содержимого <span> с цветом коврика
 function updateBodyColorOutput() {
-  colorBodyRadios.forEach(function(radio) {
+  colorBodyRadios.forEach(function (radio) {
     if (radio.checked) {
       colorBodyOutput.innerText = radio.value;
     }
@@ -238,7 +238,7 @@ function updateBodyColorOutput() {
 
 // Функция для обновления текстового содержимого <span> с цветом канта
 function updateCantColorOutput() {
-  colorCantRadios.forEach(function(radio) {
+  colorCantRadios.forEach(function (radio) {
     if (radio.checked) {
       colorCantOutput.innerText = radio.value;
     }
@@ -246,11 +246,11 @@ function updateCantColorOutput() {
 }
 
 // Добавляем обработчики событий для радиокнопок
-colorBodyRadios.forEach(function(radio) {
+colorBodyRadios.forEach(function (radio) {
   radio.addEventListener('change', updateBodyColorOutput);
 });
 
-colorCantRadios.forEach(function(radio) {
+colorCantRadios.forEach(function (radio) {
   radio.addEventListener('change', updateCantColorOutput);
 });
 
@@ -259,6 +259,8 @@ if (document.querySelector('.colorBodyOutput')) {
   updateBodyColorOutput();
   updateCantColorOutput();
 }
+
+
 
 
 // Добавляем функциональность для смены классов цветов коврика и канта (ваш предыдущий код)
@@ -283,11 +285,11 @@ function setCantColorClass(event) {
   updateCantColorOutput();
 }
 
-colorButtons.forEach(function(button) {
+colorButtons.forEach(function (button) {
   button.addEventListener('click', setColorClass);
 });
 
-colorCantButtons.forEach(function(button) {
+colorCantButtons.forEach(function (button) {
   button.addEventListener('click', setCantColorClass);
 });
 
@@ -305,102 +307,102 @@ colorCantButtons.forEach(function(button) {
 // =====================================================================
 // Слайдер вариантов ковриков
 const carMatsCategoryesSwiper = new Swiper('.deafult-slider', {
-    // Стрелочки
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+  // Стрелочки
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+  // Скроллбар
+  scrollbar: {
+    el: '.swiper-scrollbar',
+    draggable: true
+  },
+  // Количетсво выводимых слайдов
+  slidesPerView: 3,
+  // Что то
+  watchOverflow: true,
+  // Отсутпы между слайдами
+  spaceBetween: 150,
+  // Что то
+  initialSlide: 1,
+  // Скорость переключения слайдов
+  speed: 500,
+  // Режим активного слайда по центру
+  centeredSlides: true,
+  roundLengths: true,
+  // autoHeight: true,
+  // адаптив
+  breakpoints: {
+    320: {
+      spaceBetween: 80,
+      slidesPerView: 1,
     },
-    // Скроллбар
-    scrollbar: {
-        el: '.swiper-scrollbar',
-        draggable: true
+    958: {
+      spaceBetween: 80,
+      slidesPerView: 1.5,
     },
-    // Количетсво выводимых слайдов
-    slidesPerView: 3,
-    // Что то
-    watchOverflow: true,
-    // Отсутпы между слайдами
-    spaceBetween: 150,
-    // Что то
-    initialSlide: 1,
-    // Скорость переключения слайдов
-    speed: 500,
-    // Режим активного слайда по центру
-    centeredSlides: true,
-    roundLengths: true,
-    // autoHeight: true,
-    // адаптив
-    breakpoints: {
-        320: {
-            spaceBetween: 80,
-            slidesPerView: 1,
-        },
-        958: {
-            spaceBetween: 80,
-            slidesPerView: 1.5,
-        },
-        1180: {
-            spaceBetween: 140,
-            slidesPerView: 2.5,
-        },
-        1290: {
-            spaceBetween: 140,
-            slidesPerView: 2.3,
-        },
-        1646: {
-            spaceBetween: 150,
-            slidesPerView: 3,
-        },
+    1180: {
+      spaceBetween: 140,
+      slidesPerView: 2.5,
     },
+    1290: {
+      spaceBetween: 140,
+      slidesPerView: 2.3,
+    },
+    1646: {
+      spaceBetween: 150,
+      slidesPerView: 3,
+    },
+  },
 });
 
 // Слайдер аксессуаров
 const accessoriesSwiper = new Swiper('.accessoriesSlider', {
-    // Стрелочки
-    navigation: {
-        nextEl: '.accessoriesSlider-swiper-button-next',
-        prevEl: '.accessoriesSlider-swiper-button-prev',
+  // Стрелочки
+  navigation: {
+    nextEl: '.accessoriesSlider-swiper-button-next',
+    prevEl: '.accessoriesSlider-swiper-button-prev',
+  },
+  // Скроллбар
+  scrollbar: {
+    el: '.accessoriesSlider-swiper-scrollbar',
+    draggable: true
+  },
+  // Количетсво выводимых слайдов
+  slidesPerView: 2,
+  // Что то
+  watchOverflow: true,
+  // Отсутпы между слайдами
+  spaceBetween: 140,
+  // Что то
+  initialSlide: 0,
+  // Скорость переключения слайдов
+  speed: 500,
+  // Режим активного слайда по центру
+  centeredSlides: true,
+  roundLengths: true,
+  // адаптив
+  breakpoints: {
+    320: {
+      spaceBetween: 80,
+      slidesPerView: 1,
+
     },
-    // Скроллбар
-    scrollbar: {
-        el: '.accessoriesSlider-swiper-scrollbar',
-        draggable: true
+    958: {
+      spaceBetween: 80,
+      slidesPerView: 1.5,
     },
-    // Количетсво выводимых слайдов
-    slidesPerView: 2,
-    // Что то
-    watchOverflow: true,
-    // Отсутпы между слайдами
-    spaceBetween: 140,
-    // Что то
-    initialSlide: 0,
-    // Скорость переключения слайдов
-    speed: 500,
-    // Режим активного слайда по центру
-    centeredSlides: true,
-    roundLengths: true,
-    // адаптив
-    breakpoints: {
-        320: {
-            spaceBetween: 80,
-            slidesPerView: 1,
-            
-        },
-        958: {
-            spaceBetween: 80,
-            slidesPerView: 1.5,
-        },
-        1180: {
-            spaceBetween: 140,
-            slidesPerView: 2.6,
-        },
-        1646: {
-            spaceBetween: 30,
-            slidesPerView: 3,
-            centeredSlides: false,
-            roundLengths: false,
-        },
+    1180: {
+      spaceBetween: 140,
+      slidesPerView: 2.6,
     },
+    1646: {
+      spaceBetween: 30,
+      slidesPerView: 3,
+      centeredSlides: false,
+      roundLengths: false,
+    },
+  },
 });
 
 
@@ -408,8 +410,8 @@ const accessoriesSwiper = new Swiper('.accessoriesSlider', {
 const productCarpetSwiper = new Swiper('.product-section-wrap__gallery', {
   // Скроллбар
   scrollbar: {
-      el: '.gallery-swiper-scrollbar',
-      draggable: true
+    el: '.gallery-swiper-scrollbar',
+    draggable: true
   },
   // Количетсво выводимых слайдов
   slidesPerView: 1,
@@ -426,53 +428,53 @@ const productCarpetSwiper = new Swiper('.product-section-wrap__gallery', {
     swiper: {
       el: '.product-section-wrap__gallery__thumbs',
       slidesPerView: 5,
-      spaceBetween: 10, 
+      spaceBetween: 10,
     }
   }
-  
+
 });
 
 
 // =====================================================================
 // Модальные окна
 function createModal(modalElement, openButtons, closeButton) {
-    // Открываем модальное окно при клике на кнопку(и)
-    openButtons.forEach(function(openButton) {
-      openButton.onclick = function() {
-        showModal(modalElement);
-      }
-    });
-  
-    // Закрываем модальное окно при клике на крестик
-    closeButton.onclick = function() {
+  // Открываем модальное окно при клике на кнопку(и)
+  openButtons.forEach(function (openButton) {
+    openButton.onclick = function () {
+      showModal(modalElement);
+    }
+  });
+
+  // Закрываем модальное окно при клике на крестик
+  closeButton.onclick = function () {
+    closeModal(modalElement);
+  }
+
+  // Закрываем модальное окно при клике на затемненный фон
+  window.onclick = function (event) {
+    if (event.target == modalElement) {
       closeModal(modalElement);
     }
-  
-    // Закрываем модальное окно при клике на затемненный фон
-    window.onclick = function(event) {
-      if (event.target == modalElement) {
-        closeModal(modalElement);
-      }
 
-    }
+  }
 
-    // Функция для показа модального окна - с анимацией
-    function showModal(modalElement) {
+  // Функция для показа модального окна - с анимацией
+  function showModal(modalElement) {
     modalElement.style.display = 'block';
-    setTimeout(function() {
-        modalElement.classList.add('show');
-        document.body.classList.add('no-scroll');
+    setTimeout(function () {
+      modalElement.classList.add('show');
+      document.body.classList.add('no-scroll');
     }, 10); // Задержка для активации анимации
-    }
+  }
 
-    // Функция для закрытия модального окна - с анимацией
-    function closeModal(modalElement) {
+  // Функция для закрытия модального окна - с анимацией
+  function closeModal(modalElement) {
     modalElement.classList.remove('show');
-    setTimeout(function() {
-        modalElement.style.display = 'none';
-        document.body.classList.remove('no-scroll');
+    setTimeout(function () {
+      modalElement.style.display = 'none';
+      document.body.classList.remove('no-scroll');
     }, 300); // Задержка для завершения анимации
-    }
+  }
 }
 
 // // Проверка элемента на наличие его в DOM 
@@ -513,31 +515,31 @@ if (document.querySelector('.accordion-content')) {
 
   document.addEventListener("DOMContentLoaded", function () {
     const initiallyOpenItem = document.querySelector('.accordion-item.open');
-    
+
     if (initiallyOpenItem) {
-        const content = initiallyOpenItem.querySelector('.accordion-content');
-        content.style.maxHeight = content.scrollHeight + 'px';
+      const content = initiallyOpenItem.querySelector('.accordion-content');
+      content.style.maxHeight = content.scrollHeight + 'px';
     }
   });
-  
+
   const accordionItems = document.querySelectorAll('.accordion-item');
-  
+
   accordionItems.forEach((item) => {
     const header = item.querySelector('.accordion-header');
     const content = item.querySelector('.accordion-content');
-  
+
     header.addEventListener('click', () => {
-        const isOpen = item.classList.contains('open');
-  
-        accordionItems.forEach((otherItem) => {
-            otherItem.classList.remove('open');
-            otherItem.querySelector('.accordion-content').style.maxHeight = '0';
-        });
-  
-        if (!isOpen) {
-            item.classList.add('open');
-            content.style.maxHeight = content.scrollHeight + 'px';
-        }
+      const isOpen = item.classList.contains('open');
+
+      accordionItems.forEach((otherItem) => {
+        otherItem.classList.remove('open');
+        otherItem.querySelector('.accordion-content').style.maxHeight = '0';
+      });
+
+      if (!isOpen) {
+        item.classList.add('open');
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
     });
   });
 }
@@ -549,19 +551,19 @@ const scrollToTopButton = document.getElementById('scrollToTopButton');
 
 // Функция, которая скроллит страницу наверх
 function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
 }
 
 // Показываем или скрываем кнопку при скролле
 function toggleScrollButton() {
-    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
-        scrollToTopButton.style.opacity = 1;
-    } else {
-        scrollToTopButton.style.opacity = 0;
-    }
+  if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+    scrollToTopButton.style.opacity = 1;
+  } else {
+    scrollToTopButton.style.opacity = 0;
+  }
 }
 // Обработчик события скролла
 window.addEventListener('scroll', toggleScrollButton);
@@ -579,21 +581,21 @@ if (document.querySelector('.tab-button')) {
 
   // Добавляем обработчик события на каждую кнопку таба
   tabButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-          // Убираем класс "active" у всех кнопок и контентов
-          tabButtons.forEach((btn) => {
-              btn.classList.remove("active");
-          });
-          tabContents.forEach((content) => {
-              content.classList.remove("active");
-          });
-
-          // Добавляем класс "active" только к текущей кнопке и соответствующему контенту
-          const tabId = button.getAttribute("data-tab");
-          const tabContent = document.getElementById(tabId);
-          button.classList.add("active");
-          tabContent.classList.add("active");
+    button.addEventListener("click", () => {
+      // Убираем класс "active" у всех кнопок и контентов
+      tabButtons.forEach((btn) => {
+        btn.classList.remove("active");
       });
+      tabContents.forEach((content) => {
+        content.classList.remove("active");
+      });
+
+      // Добавляем класс "active" только к текущей кнопке и соответствующему контенту
+      const tabId = button.getAttribute("data-tab");
+      const tabContent = document.getElementById(tabId);
+      button.classList.add("active");
+      tabContent.classList.add("active");
+    });
   });
 }
 
@@ -608,7 +610,7 @@ if (document.querySelector('.tab-button')) {
 
 // =====================================================================
 // Функционал карточки твовара коврика 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Счетчик в карточке товара логотипа для опций с бортами
   // Проверка элемента на наличие его в DOM 
   if (document.querySelector('.product-section-carpet')) {
@@ -624,7 +626,7 @@ document.addEventListener("DOMContentLoaded", function() {
     decrementButton.addEventListener('click', function () {
       updateCounter(-1);
     });
-    
+
     function updateCounter(change) {
       let currentValue = parseInt(counterInput.value);
       if (currentValue + change >= 1 && currentValue + change <= 8) {
@@ -641,7 +643,7 @@ document.addEventListener("DOMContentLoaded", function() {
           console.log(1)
 
         }
-        
+
       }
     }
   }
@@ -651,7 +653,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // updateTotalPrice()
   if (document.querySelector('.product-section-carpet')) {
     // Вывод итого 
-    let productPriceTag = document.getElementById('productPriceTag');
+    // let productPriceTag = document.getElementById('productPriceTag');
+    let productPriceTag = document.querySelectorAll('.productPriceTag');
 
     // Переменные для расчета 
     const carpetFull = document.getElementById('carpetFull');
@@ -664,13 +667,11 @@ document.addEventListener("DOMContentLoaded", function() {
     const carpetLogo = document.getElementById('carpetLogo');
     const carpetLogoNum = document.getElementById('carpetLogoNum');
 
-    
-    
+
+
     // Функция для обновления итоговой цены
     function updateTotalPrice() {
       let totalPrice = 0;
-      
-      
 
       // Извлекаем значения цены из <span> элементов и добавляем их к totalPrice
       if (carpetFull.checked) {
@@ -692,18 +693,23 @@ document.addEventListener("DOMContentLoaded", function() {
         totalPrice += parseInt(carpetDriverPriceTag.innerHTML);
       }
 
-      
+
       if (carpetSaddle.checked) {
         totalPrice += parseInt(carpetSaddlePriceTag.innerHTML);
       }
       if (carpetLogo.checked) {
         totalPrice += (parseInt(carpetLogoPriceTag.innerHTML) * parseInt(carpetLogoNum.value));
       }
-      
+
       
 
-      // Устанавливаем новое значение totalPrice в элементе productPriceTag
-      productPriceTag.innerHTML = totalPrice;
+
+
+        // Устанавливаем новое значение totalPrice в элементе productPriceTag
+        // productPriceTag.innerHTML = totalPrice;
+        productPriceTag.forEach((price) => {
+          price.innerHTML = totalPrice;
+        })
     }
 
 
@@ -714,7 +720,7 @@ document.addEventListener("DOMContentLoaded", function() {
     carpetFront.addEventListener('change', updateTotalPrice);
     carpetBack.addEventListener('change', updateTotalPrice);
     carpetDriver.addEventListener('change', updateTotalPrice);
-    
+
 
     // Вызываем функцию updateTotalPrice для первоначального расчета и отображения итоговой цены
     updateTotalPrice();
@@ -727,7 +733,8 @@ document.addEventListener("DOMContentLoaded", function() {
   // updateTotalPriceWithoutS()
   if (document.querySelector('.product-section-carpet')) {
     // Вывод итого 
-    let productPriceTag = document.getElementById('productPriceTag');
+    // let productPriceTag = document.getElementById('productPriceTag');
+    let productPriceTag = document.querySelectorAll('.productPriceTag');
 
     // Переменные для расчета 
     const carpetFullWithoutS = document.getElementById('carpetFullWithoutS');
@@ -738,7 +745,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const carpetDriverWithoutS = document.getElementById('carpetDriverWithoutS');
     const carpetLogo = document.getElementById('carpetLogo');
     const carpetLogoNum = document.getElementById('carpetLogoNum');
-    
+
 
     // Функция для обновления итоговой цены
     function updateTotalPriceWithoutS() {
@@ -768,15 +775,21 @@ document.addEventListener("DOMContentLoaded", function() {
       if (carpetSaddle.checked) {
         totalPrice += parseInt(carpetSaddlePriceTag.innerHTML);
       }
+
       if (carpetLogo.checked) {
         totalPrice += parseInt(carpetLogoPriceTag.innerHTML) * parseInt(carpetLogoNum.value);
       }
-      
-      
-      
+
+
+
+
+
 
       // Устанавливаем новое значение totalPrice в элементе productPriceTag
-      productPriceTag.innerHTML = totalPrice;
+      productPriceTag.forEach((price) => {
+        price.innerHTML = totalPrice;
+      })
+      // productPriceTag.innerHTML = totalPrice;
     }
 
     // Добавляем обработчик события change для каждого чекбокса
@@ -786,11 +799,11 @@ document.addEventListener("DOMContentLoaded", function() {
     carpetFrontWithoutS.addEventListener('change', updateTotalPriceWithoutS);
     carpetBackWithoutS.addEventListener('change', updateTotalPriceWithoutS);
     carpetDriverWithoutS.addEventListener('change', updateTotalPriceWithoutS);
-    
+
 
     // Вызываем функцию updateTotalPrice для первоначального расчета и отображения итоговой цены
     updateTotalPriceWithoutS();
-    
+
   }
 
 
@@ -803,13 +816,13 @@ document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.product-section-carpet')) {
     const withSideBtn = document.querySelector('#withSide');
     const withoutSideBtn = document.querySelector('#withoutSide');
-    
+
     const withSideContent = document.querySelector('._with-side');
     const withoutSideContent = document.querySelector('._without-side');
 
-    
-    
-    withSideBtn.addEventListener('change', function() {
+
+
+    withSideBtn.addEventListener('change', function () {
       withSideContent.classList.add('active');
       withoutSideContent.classList.remove('active');
       carpetFull.checked = true;
@@ -820,14 +833,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
       updateTotalPrice();
       carpetFull.click();
+      carpetFull.checked = true;
     });
 
     if (withSideContent.classList.contains('active')) {
       carpetSaddle.addEventListener('change', updateTotalPrice);
       carpetLogo.addEventListener('change', updateTotalPrice);
     }
-    
-    withoutSideBtn.addEventListener('change', function() {
+
+    withoutSideBtn.addEventListener('change', function () {
       withoutSideContent.classList.add('active');
       withSideContent.classList.remove('active');
       carpetFull.checked = false;
@@ -838,6 +852,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
       updateTotalPriceWithoutS();
       carpetFullWithoutS.click();
+      carpetFullWithoutS.checked = true;
     });
   }
 
@@ -883,14 +898,14 @@ if (document.querySelector('.product-section-cover')) {
       hiddenInput.value = input.checked ? 'on' : 'off';
     });
   }
-  
+
   // Вызов функции для чекбоксов 
   productOptionInputCheckbox(coverPillow, coverPillowHiden);
 }
 
 // =====================================================================
 // Калькулятор в карточке товара коврика
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Счетчик в карточке товара логотипа для опций с бортами
   // Проверка элемента на наличие его в DOM 
   if (document.querySelector('.product-section-cover')) {
@@ -900,8 +915,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const coverPillowNumHiden = document.getElementById('coverPillowNumHiden');
 
-    
-    incrementButton.addEventListener('click', function() {
+
+    incrementButton.addEventListener('click', function () {
       let currentValue = parseInt(counterInput.value); // Получаем текущее значение
       if (currentValue < 8) {
         currentValue++; // Увеличиваем значение на 1
@@ -911,8 +926,8 @@ document.addEventListener("DOMContentLoaded", function() {
         updateTotalPrice()
       }
     });
-    
-    decrementButton.addEventListener('click', function() {
+
+    decrementButton.addEventListener('click', function () {
       let currentValue = parseInt(counterInput.value); // Получаем текущее значение
       if (currentValue > 1) {
         currentValue--; // Уменьшаем значение на 1
@@ -937,15 +952,15 @@ document.addEventListener("DOMContentLoaded", function() {
     const coverOne = document.getElementById('coverOne');
 
     const coverPillow = document.getElementById('coverPillow');
-    
 
-    
-    
+
+
+
     // Функция для обновления итоговой цены
     function updateTotalPrice() {
       let totalPrice = 0;
-      
-      
+
+
 
       // Извлекаем значения цены из <span> элементов и добавляем их к totalPrice
       if (coverFront.checked) {
@@ -960,12 +975,12 @@ document.addEventListener("DOMContentLoaded", function() {
       if (coverOne.checked) {
         totalPrice += parseInt(coverOnePriceTag.innerHTML);
       }
-      
+
       if (coverPillow.checked) {
         totalPrice += parseInt(coverPillowPriceTag.innerHTML) * parseInt(coverPillowNum.value);
       }
-      
-      
+
+
 
       // Устанавливаем новое значение totalPrice в элементе productPriceTag
       productPriceTag.innerHTML = totalPrice;
@@ -979,7 +994,7 @@ document.addEventListener("DOMContentLoaded", function() {
     coverOne.addEventListener('change', updateTotalPrice);
 
     coverPillow.addEventListener('change', updateTotalPrice);
-    
+
 
     // Вызываем функцию updateTotalPrice для первоначального расчета и отображения итоговой цены
     updateTotalPrice();
@@ -1005,7 +1020,7 @@ document.addEventListener("DOMContentLoaded", function() {
 // =====================================================================
 // Функционал карточки твовара органайзера
 // Калькулятор в карточке товара коврика
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   // Проверка элемента на наличие его в DOM 
   if (document.querySelector('.product-section-organaizer')) {
     // Вывод итого 
@@ -1015,16 +1030,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const complect_70_30_30 = document.getElementById('complect_70_30_30');
     const complect_60_30_30 = document.getElementById('complect_60_30_30');
     const complect_50_30_30 = document.getElementById('complect_50_30_30');
-    
+
     // Функция для обновления итоговой цены
     function updateTotalPrice() {
       let totalPrice = 0;
-      
+
 
       // Извлекаем значения цены из <span> элементов и добавляем их к totalPrice
       if (complect_70_30_30.checked) {
         totalPrice += parseInt(complect_70_30_30_num.innerHTML);
-        
+
       }
       if (complect_60_30_30.checked) {
         totalPrice += parseInt(complect_60_30_30_num.innerHTML);
@@ -1032,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", function() {
       if (complect_50_30_30.checked) {
         totalPrice += parseInt(complect_50_30_30_num.innerHTML);
       }
-      
+
       // Устанавливаем новое значение totalPrice в элементе productPriceTag
       productPriceTag.innerHTML = totalPrice;
     }
@@ -1085,12 +1100,12 @@ let ok = false;
 
 function loadMap(mapUrl, targetElementId) {
   if (ok === false) {
-      ok = true;
-      setTimeout(() => {
-          let script = document.createElement('script');
-          script.src = mapUrl;
-          document.getElementById(targetElementId).replaceWith(script);
-      }, 3500);
+    ok = true;
+    setTimeout(() => {
+      let script = document.createElement('script');
+      script.src = mapUrl;
+      document.getElementById(targetElementId).replaceWith(script);
+    }, 3500);
   }
 }
 
