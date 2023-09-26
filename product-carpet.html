@@ -173,19 +173,23 @@
                             <div class="gallery-swiper-scrollbar"></div>
                         </div>
 
-                        <div class="product-section-wrap__tarifs__pay _carpet">
-                            <p class="product-section-wrap__tarifs__pay__price-tag"><span>Итого: </span><output id="productPriceTag" name="total-price">0</output> ₽</p>
-                            <button type="button" class="product-section-wrap__tarifs__btn btn-red openModalOrderBtn">заказать</button>
-                        </div>
+                        
+
+                       
 
 
-                        <div class="constructor-wrap__result--wrap">
-                            <p class="constructor-wrap__result__text"><strong>Пример сочетания сочетания цветов</strong></p>
+                        <div class="constructor-wrap__result--wrap _product">
+                            <p class="constructor-wrap__result__text"><strong>Пример сочетания цветов</strong></p>
                             <div class="constructor-wrap__result">
                                 <div class="constructor-wrap__result__cant colorCantBlack"></div>
                                 <div class="constructor-wrap__result__body colorBlack"></div>
                             </div>
                             <div><span id="colorBodyOutput">Черный</span> + <span id="colorCantOutput">Черный</span></div>
+                        </div>
+
+                        <div class="product-section-wrap__tarifs__pay _carpet _desktop">
+                            <p class="product-section-wrap__tarifs__pay__price-tag"><span>Итого: </span><output id="productPriceTag" class="productPriceTag" name="total-price">0</output> ₽</p>
+                            <button type="button" class="product-section-wrap__tarifs__btn btn-red openModalOrderBtn">заказать</button>
                         </div>
 
                     </div>
@@ -315,26 +319,7 @@
                                 
     
     
-                                <!-- <h3 class="product-section-wrap__options__title">Дополнительные опции:</h3>
-                                <label class="product-section-wrap__options__item" for="carpetSaddleWithoutS">
-                                    <input class="radio" type="checkbox" id="carpetSaddleWithoutS" name="carpet_saddle">
-                                    <span class="custom-checkbox"></span>
-                                    <span class="product-section-wrap__options__item__label">Подпятник резиновый +600₽</span>
-                                    <span id="carpetSaddlePriceTagWithoutS" style="display: none;">600</span>
-                                </label>
-                                <label class="product-section-wrap__options__item" for="carpetLogoWithoutS">
-                                    <input class="radio" type="checkbox" id="carpetLogoWithoutS" name="carpet_logo">
-                                    <span class="custom-checkbox"></span>
-                                    <div class="product-section-wrap__options__item__wrap">
-                                        <span class="product-section-wrap__options__item__label">Логотип металлический +200₽/шт</span>
-                                        <span id="carpetLogoPriceTagWithoutS" style="display: none;">200</span>
-                                        <div class="custom-counter">
-                                            <button type="button" class="counter-button decrement _withoutS">-</button>
-                                            <input id="carpetLogoNumWithoutS" name="carpet_logo_num" type="text" class="counter-input _withoutS" value="1" min="1" max="8">
-                                            <button type="button" class="counter-button increment _withoutS">+</button>
-                                        </div>
-                                    </div>
-                                </label> -->
+                                
                             </div>
 
                             
@@ -366,6 +351,8 @@
                             </div>
                             
                         </div>
+
+                        
                         
 
                         
@@ -601,14 +588,10 @@
                             </div>
                         </div>
 
-                        
-
-                        <!-- Скрытые инпуты опций  -->
-                        <!-- <input type="hidden" id="carpetInputHiden" name="carpet_tarif_hiden" value="Полный комплект в салон на два ряда - 3500₽">
-
-                        <input type="hidden" id="carpetSaddleHiden" name="carpet_saddle_hiden" value="off">
-                        <input type="hidden" id="carpetLogoHiden" name="carpet_logo_hiden" value="off">
-                        <input type="hidden" id="carpetLogoNumHiden" name="carpet_logo_num_hiden" value="1"> -->
+                        <div class="product-section-wrap__tarifs__pay _carpet _mobile">
+                            <p class="product-section-wrap__tarifs__pay__price-tag"><span>Итого: </span><output id="productPriceTag" class="productPriceTag" name="total-price">0</output> ₽</p>
+                            <button type="button" class="product-section-wrap__tarifs__btn btn-red openModalOrderBtn">заказать</button>
+                        </div>
 
                         <!-- Модальное окно заказа -->
                         <div id="modalOrder" class="modal">
